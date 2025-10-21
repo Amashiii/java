@@ -69,6 +69,41 @@ else:
     print(f"Oprocentowanie: {oprocentowanie * 100:.1f}%")
     print(f"Cena końcowa: {cena_koncowa:.2f} PLN")
     print(f"Wysokość jednej raty: {rata_miesieczna:.2f} PLN")
+Zadanie 6
+        # a) Wczytanie pierwszej liczby
+    liczba1 = float(input("Podaj pierwszą liczbę: "))
+
+    # b) Wczytanie symbolu operacji
+    dzialanie = input("Podaj symbol operacji (+, -, *, /): ")
+
+    # c) Wczytanie drugiej liczby
+    liczba2 = float(input("Podaj drugą liczbę: "))
+
+    # d) Wykonanie odpowiedniego działania (switch-case = match-case)
+    match dzialanie:
+        case '+':
+            wynik = liczba1 + liczba2
+            print(f"Wynik: {liczba1} + {liczba2} = {wynik}")
+        case '-':
+            wynik = liczba1 - liczba2
+            print(f"Wynik: {liczba1} - {liczba2} = {wynik}")
+        case '*':
+            wynik = liczba1 * liczba2
+            print(f"Wynik: {liczba1} * {liczba2} = {wynik}")
+        case '/':
+            if liczba2 == 0:
+                print("Błąd: Nie można dzielić przez zero!")
+            else:
+                wynik = liczba1 / liczba2
+                print(f"Wynik: {liczba1} / {liczba2} = {wynik}")
+        case _:
+            print("Błąd: Nieznany symbol operacji! Dozwolone: +, -, *, /.")
+
+except ValueError:
+    print("Błąd: Wprowadzono niepoprawne dane. Podaj liczby rzeczywiste.")
+
+# e) Zakończenie działania programu
+input("\nNaciśnij Enter, aby zakończyć działanie programu...")
 
         }
     }
