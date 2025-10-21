@@ -1,1 +1,144 @@
+ Zadanie 1
+import random
 
+
+a = [random.randint(-10, 10) for _ in range(10)]
+print("Wylosowane liczby:", " ".join(str(x) for x in a))
+
+
+mini = min(a)
+maxi = max(a)
+sr = sum(a) / len(a)
+smaller = sum(1 for x in a if x < sr)
+larger = sum(1 for x in a if x > sr)
+
+
+print(f"Min: {mini}, max: {maxi}")
+print(f"Średnia: {sr:.2f}")
+print(f"Mniejszych od śr.: {smaller}")
+print(f"Większych od śr.: {larger}")
+print("Liczby w odwrotnej kolejności:")
+print(" ".join(str(x) for x in reversed(a)))
+ Zadanie 2
+import random
+
+
+arr = [random.randint(1, 10) for _ in range(20)]
+print("Wylosowane liczby:", " ".join(str(x) for x in arr))
+
+
+counts = {i: 0 for i in range(1, 11)}
+for x in arr:
+counts[x] += 1
+
+
+print("Wystąpienia:")
+for i in range(1, 11):
+print(f"{i} - {counts[i]}")
+Zadanie 3
+import random
+
+
+n = 5
+mat = [[random.randint(-5, 5) for _ in range(n)] for _ in range(n)]
+print("Macierz 5x5:")
+for row in mat:
+print(" ".join(f"{x:3d}" for x in row))
+
+
+col_mins = [min(mat[r][c] for r in range(n)) for c in range(n)]
+col_maxs = [max(mat[r][c] for r in range(n)) for c in range(n)]
+
+
+print('\nMinima kolumn:')
+print(' '.join(f"{x:3d}" for x in col_mins))
+print('Maksima kolumn:')
+print(' '.join(f"{x:3d}" for x in col_maxs))
+Zadanie 4
+
+
+def to_zm_32(n: int):
+bits = [0] * 32
+sign = 1 if n < 0 else 0
+val = abs(n)
+for i in range(31):
+bits[31 - i] = (val >> i) & 1
+bits[0] = sign
+return bits
+
+
+if __name__ == '__main__':
+x = int(input("Podaj liczbę całkowitą: "))
+bits = to_zm_32(x)
+sign = bits[0]
+value_bits = ''.join(str(b) for b in bits[1:])
+value_bits_trim = value_bits.lstrip('0') or '0'
+print(f"Liczba {x} w ZM: {sign}.{value_bits_trim}")
+print("Pełne 32 bity:", ''.join(str(b) for b in bits))
+Zadanie 5
+
+def to_bin_abs(val, bits=32):
+s = bin(val)[2:]
+return s.rjust(bits, '0')
+def to_zm(bits32_str):
+return bits32_str[0] + '.' + bits32_str[1:]
+
+
+def zu1(bits32_str):
+sign = bits32_str[0]
+if sign == '0':
+return bits32_str
+inv = ''.join('1' if b == '0' else '0' for b in bits32_str[1:])
+return sign + '.' + inv
+
+
+def zu2(bits32_str):
+sign = bits32_str[0]
+if sign == '0':
+return bits32_str
+mag = bits32_str[1:]
+inv = ''.join('1' if b == '0' else '0' for b in mag)
+as_int = int(inv, 2) + 1
+as_bin = bin(as_int)[2:].rjust(len(mag), '0')[-len(mag):]
+return sign + '.' + as_bin
+
+
+if __name__ == '__main__':
+x = int(input("Podaj liczbę całkowitą: "))
+bits = to_bin_abs(abs(x), bits=32)
+sign = '1' if x < 0 else '0'
+bits32 = sign + bits[1:]
+print("ZM:", to_zm(bits32))
+print("ZU1:", zu1(bits32))
+print("ZU2:", zu2(bits32))
+Zadanie 6
+
+from zad5_zuz1_zuz2 import to_bin_abs, zu1, zu2
+
+if __name__ == '__main__':
+a = int(input('A = '))
+b = int(input('B = '))
+op = input('Operacja (+ -): ')
+if op == '+':
+res = a + b
+else:
+res = a - b
+print('Wynik (liczbowo):', res)
+bits = to_bin_abs(abs(res), bits=32)
+sign = '1' if res < 0 else '0'
+bits32 = sign + bits[1:]
+print('ZM:', bits32[0]+'.'+bits32[1:])
+print('ZU1:', zu1(bits32))
+print('ZU2:', zu2(bits32))
+Zadanie 9
+
+from math import gcd
+n = int(input('Podaj liczbę (>0): '))
+if n <= 0:
+raise SystemExit('n musi być > 0')
+print(' ', ' '.join(str(i) for i in range(1, n+1)))
+for i in range(1, n+1):
+row = []
+for j in range(1, n+1):
+row.append('+' if gcd(i, j) == 1 else '.')
+print(i, ' '.join(row))
