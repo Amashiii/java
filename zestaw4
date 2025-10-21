@@ -1,1 +1,67 @@
+Zadanie 1
 
+text = input("Podaj ciąg znaków: ")
+
+if len(text) == 0:
+    print("Podano pusty ciąg znaków.")
+else:
+    last_char = text[-1]
+    count = text.count(last_char)
+    print(f"Ostatni znak to: '{last_char}'")
+    print(f"Występuje w ciągu {count} razy.")
+Zadanie 2
+
+text = input("Podaj ciąg znaków: ")
+reversed_text = text[::-1]
+print(f"Odwrócony ciąg: {reversed_text}")
+Zadanie 3
+
+text = input("Podaj ciąg znaków: ").lower().replace(" ", "")
+if text == text[::-1]:
+    print("Podany ciąg jest palindromem.")
+else:
+    print("Podany ciąg nie jest palindromem.")
+Zadanie 4
+
+text = input("Podaj tekst: ")
+
+suma = sum(int(ch) for ch in text if ch.isdigit())
+
+print(f"Suma cyfr w tekście: {suma}")
+Zadanie 5
+
+expr = input("Podaj wyrażenie arytmetyczne: ")
+
+stack = []
+correct = True
+
+for ch in expr:
+    if ch == '(':
+        stack.append(ch)
+    elif ch == ')':
+        if not stack:
+            correct = False
+            break
+        stack.pop()
+
+if correct and not stack:
+    print("OK")
+else:
+    print("Błędne sparowanie nawiasów")
+Zadanie 6
+
+text = input("Podaj łańcuch znaków do zaszyfrowania: ").lower()
+shift = int(input("Podaj przesunięcie: "))
+
+result = ""
+
+for ch in text:
+    if ch == ' ':
+        result += ' '
+    elif 'a' <= ch <= 'z':
+        new_pos = (ord(ch) - ord('a') + shift) % 26
+        result += chr(ord('a') + new_pos)
+    else:
+        result += ch
+
+print(f"Zaszyfrowany tekst: {result}")
