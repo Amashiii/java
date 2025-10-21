@@ -10,7 +10,6 @@ public class Main {
 //        System.out.println("Podaj liczbę stopni w celcjuszach");
 //        stopnieCelcjusza = scanner.nextDouble();
 //        stopnieFahrenheita = 1.8 * stopnieCelcjusza + 32;
-//   dasdasdasdasd
 //      System.out.println("stopnie Fahrenheita: " + stopnieFahrenheita);
         //zad.2
         double liczba1 , liczba2, liczba3;
